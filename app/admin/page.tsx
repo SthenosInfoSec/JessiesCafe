@@ -120,6 +120,34 @@ export default function AdminPage() {
     setUser(null);
   };
 
+  const handleStatusUpdate = async (BookingID: string, newStatus: string) => {
+    // Optimistic update
+    setData((prev) => prev.map((item) =>
+      item.BookingID === BookingID ? { ...item, status: newStatus } : item
+    ));
+
+    try {
+      const token = user.getIdToken().getJwtToken();
+      const res = await fetch(`${API_URL}/admin/bookings`, {
+        method: "PUT",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ BookingID, status: newStatus })
+      });
+
+      if (!res.ok) {
+        console.error("Failed to update status");
+        // Revert on failure (optional, but good practice)
+        fetchData();
+      }
+    } catch (e) {
+      console.error(e);
+      fetchData();
+    }
+  };
+
   if (checkingSession) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-cream">
@@ -215,9 +243,20 @@ export default function AdminPage() {
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.guests}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.phone}<br />{item.email}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                            {item.status}
-                          </span>
+                          <select
+                            value={item.status || "PENDING"}
+                            onChange={(e) => handleStatusUpdate(item.BookingID, e.target.value)}
+                            className={`px-2 py-1 text-xs font-semibold rounded-full border-none focus:ring-2 focus:ring-olive cursor-pointer appearance-none ${item.status === "CONFIRMED" ? "bg-green-100 text-green-800" :
+                              item.status === "CANCELLED" ? "bg-red-100 text-red-800" :
+                                item.status === "COMPLETED" ? "bg-gray-100 text-gray-800" :
+                                  "bg-yellow-100 text-yellow-800"
+                              }`}
+                          >
+                            <option value="PENDING">PENDING</option>
+                            <option value="CONFIRMED">CONFIRMED</option>
+                            <option value="CANCELLED">CANCELLED</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                          </select>
                         </td>
                       </>
                     ) : (
@@ -225,7 +264,7 @@ export default function AdminPage() {
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(item.createdAt).toLocaleDateString()}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item.name}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.email}</td>
-                        <td className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">{item.message}</td>
+                        <td className="px-6 py-4 text-sm text-gray-500 whitespace-pre-wrap">{item.message}</td>
                       </>
                     )}
                   </tr>
