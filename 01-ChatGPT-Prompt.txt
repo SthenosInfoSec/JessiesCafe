@@ -1,0 +1,39 @@
+Research Jessie's Cafe in Pitlochry, Scotland, UK. 
+The place is great, but has no website. 
+You can find some photos of them here
+
+https://www.tripadvisor.co.uk/Restaurant_Review-g186566-d27505750-Reviews-Jessie_s_Cafe-Pitlochry_Perth_and_Kinross_Scotland.html
+
+and here
+https://www.instagram.com/jessies.cafe/?hl=en
+
+I have attachd a few pictures to give you an idea of the theme and inspiration.
+
+They also have a facebook page:
+https://www.facebook.com/jessiespitlochry/?ref=pro_upsell_xav_ig_profile_page_web#
+
+The theme of the site should be this:
+https://www.facebook.com/photo/?fbid=122125867310134695&set=a.122125867334134695
+
+Some more info about the place
+All day breakfast 🥞
+Lunch 🍽️
+Coffee ☕
+Cakes 🎂
+Pizza - Fridays from 5pm - 8pm 🍕
+Winner of Best Cafe, Perthshire 2024 & 2025🏆
+
+Address
+3a Atholl Road, Pitlochry, United Kingdom
+
+
+With all of this, can you now create a super detailed and comprehensive prompt that I can use to instruct another AI tool to generate the website for it. The website should be similar to Room Rumour Cafe, where there is an admin panel to administer. Tell the AI that they can search in this directory to see how that site is made. I would only want the theme to be less dark in the background as the Room Rumours Coffee website:
+/Users/lex/Documents/Personal/sthenos/repositories/RoomRumoursCoffee
+
+
+Secondly, add instructions for the AI to create a new repository in my GitHub account using my local git commands which is already authenticated to GH... the repo should be called JessiesCafe and should leave inside the SthenosInfoSec org in GH. Instruct the AI to create the project locally and push to the new repo. The AI has to create the repo. 
+
+Finally, design how the backend in AWS should look like (CloudFront, lambda, IAM roles and permissions created, DynamoDB, Cognito, S3, etc.), Then instruct the AI to use my local AWS CLI by using AWS_REGION=eu-west-2 and AWS_PROFILE=mvp, which is also already authenticated. 
+
+
+Provide all of this in a giant markdown file, and instead of outputing to the screen, make it available for download. 

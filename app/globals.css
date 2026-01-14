@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+:root {
+  /* Jessie's Theme Colors */
+  --background: #F5F0E6; /* Cream */
+  --foreground: #2C332C; /* Darker Olive/Black for better text readability */
+  
+  --color-cream: #F5F0E6;
+  --color-olive: #4F5D4E;
+  --color-brown: #8A6652;
+  --color-sand: #E8E4D9;
+  --color-white: #FFFFFF;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-cream: var(--color-cream);
+  --color-olive: var(--color-olive);
+  --color-brown: var(--color-brown);
+  --color-sand: var(--color-sand);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-serif); 
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
