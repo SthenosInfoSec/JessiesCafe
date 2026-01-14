@@ -30,8 +30,17 @@ export default function AdminPage() {
   // Check Session
   useEffect(() => {
     console.log("Checking session...");
+
+    // Safety check for localStorage availability (client-side only)
+    if (typeof window === 'undefined') {
+      console.log("Server-side render, skipping session check");
+      return;
+    }
+
     const cognitoUser = userPool.getCurrentUser();
+
     if (cognitoUser != null) {
+      console.log("Found current user in pool storage:", cognitoUser.getUsername());
       cognitoUser.getSession((err: any, session: any) => {
         if (err) {
           console.error("Session error:", err);
@@ -43,11 +52,22 @@ export default function AdminPage() {
           setUser(session);
         } else {
           console.log("Session invalid");
+          // Attempt to refresh if we had a refresh token? 
+          // The SDK handles this automatically typically, but good to know.
         }
         setCheckingSession(false);
       });
     } else {
-      console.log("No current user found");
+      console.log("No current user found in local storage.");
+      // Just in case, log what *is* in local storage to debug
+      try {
+        const keys = Object.keys(localStorage);
+        const cognitoKeys = keys.filter(k => k.includes('CognitoIdentityServiceProvider'));
+        console.log("Cognito keys found in localStorage:", cognitoKeys);
+      } catch (e) {
+        console.error("Could not access localStorage:", e);
+      }
+
       setCheckingSession(false);
     }
   }, []);
