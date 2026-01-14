@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -24,13 +24,12 @@ export default function Navbar() {
                     {/* Logo Section */}
                     <div className="flex-shrink-0 flex items-center">
                         <Link href="/" className="flex items-center gap-2">
-                            <div className="relative h-12 w-12 rounded-full overflow-hidden border-2 border-olive/20">
-                                <Image
-                                    src="/logo.jpg"
-                                    alt="Jessie's Café Logo"
-                                    fill
-                                    className="object-cover"
-                                />
+                            {/* Simple Daisy Icon (SVG) */}
+                            <div className="h-10 w-10 text-olive">
+                                <svg viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M50 35C50 35 35 15 20 25C5 35 15 50 15 50C15 50 5 65 20 75C35 85 50 65 50 65C50 65 65 85 80 75C95 65 85 50 85 50C85 50 95 35 80 25C65 15 50 35 50 35Z" fill="#F5F0E6" stroke="currentColor" strokeWidth="4" />
+                                    <circle cx="50" cy="50" r="10" fill="currentColor" />
+                                </svg>
                             </div>
                             <div className="text-2xl font-serif font-bold text-olive tracking-wide">
                                 Jessie's <span className="text-brown">Café</span>
